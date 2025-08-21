@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+
+    <div class="row">
+
+        <section class="watchlist-card">
+            <div class="header">
+                <h2>📊 Crypto Dashboard</h2>
+                <button class="toggle-btn" (click)="toggleDarkMode()">🌗 Toggle Dark Mode</button>
+            </div>
+            <div class="watchlist-buttons">
+                <button *ngFor="let coin of watchlist" (click)="loadCrypto(coin)">
+        {{ coin | uppercase }}
+      </button>
+
+                <!-- Month Filter -->
+                <select [(ngModel)]="selectedDays" (change)="applyFilters()">
+        <option *ngFor="let range of dayRanges" [value]="range.value">{{ range.label }}</option>
+      </select>
+
+                <!-- Price Filter -->
+                <select [(ngModel)]="selectedPrice" (change)="applyFilters()">
+        <option *ngFor="let range of priceRanges" [value]="range.value">{{ range.label }}</option>
+      </select>
+
+            </div>
+        </section>
+    </div>
+    <!-- Chart -->
+    <section class="chart-card">
+        <h3>📈 Price Trend</h3>
+        <canvas baseChart [data]="chartData" [type]="'line'"></canvas>
+    </section>
+</div>
